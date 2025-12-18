@@ -1,0 +1,136 @@
+{% comment %}
+Шаблон главной страницы приложения greeting_app.
+
+Этот HTML шаблон использует Django Template Language (DTL) для:
+- Отображения формы ввода имени
+- Показа персонализированного приветствия
+- Отображения сообщений об ошибках и успехе
+- Подключения CSS стилей
+
+Django автоматически защищает формы от CSRF атак через {% csrf_token %}
+{% endcomment %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% comment %}
+    Мета-теги для правильного отображения страницы
+    {% endcomment %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приветственное приложение</title>
+    
+    {% comment %}
+    Подключение CSS файла со стилями
+    {% static 'greeting_app/css/style.css' %} - путь к CSS файлу
+    {% endcomment %}
+    <link rel="stylesheet" href="..\..\static\greeting_app\css\style.css">
+</head>
+<body>
+    {% comment %}
+    Основной контейнер приложения
+    {% endcomment %}
+    <div class="container">
+        {% comment %}
+        Заголовок приложения
+        {% endcomment %}
+        <header>
+            <h1>Добро пожаловать!</h1>
+            <p class="subtitle1">здесь представлена демонстрация работы приложения на фреймворке Django</p>
+            <p class="subtitle2">Введите ваше имя, чтобы получить приветствие от программы</p>
+        </header>
+
+        {% comment %}
+        Блок для отображения сообщений Django
+        messages - это система сообщений Django для уведомлений пользователя
+        {% endcomment %}
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    {% comment %}
+                    Отображение каждого сообщения с соответствующим классом
+                    message.tags определяет тип сообщения (success, error, info, warning)
+                    {% endcomment %}
+                    <div class="message message-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% comment %}
+        Блок персонализированного приветствия
+        Отображается, если есть последнее сохраненное имя
+        {% endcomment %}
+        {% if last_name %}
+            <div class="greeting-block">
+                <h2>Привет тебе, {{ last_name.name }}!</h2>
+                <p class="greeting-text">Рады видеть вас снова!</p>
+            </div>
+        {% endif %}
+
+        {% comment %}
+        Форма для ввода имени
+        method="POST" - отправка данных методом POST (безопаснее, чем GET)
+        action="" - отправка формы на тот же URL (главная страница)
+        {% endcomment %}
+        <form method="POST" action="" class="name-form">
+            {% comment %}
+            CSRF токен - обязательный элемент для защиты от CSRF атак
+            Django автоматически проверяет этот токен при обработке POST запроса
+            Без этого токена форма не будет обработана (ошибка 403)
+            {% endcomment %}
+            {% csrf_token %}
+            
+            {% comment %}
+            Отображение полей формы
+            form.as_p - отображает форму как параграфы (каждое поле в <p>)
+            Альтернативы: form.as_table, form.as_ul
+            {% endcomment %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+
+            {% comment %}
+            Отображение ошибок формы (если есть)
+            form.errors - словарь с ошибками валидации
+                    {% endcomment %}
+            {% if form.errors %}
+                <div class="form-errors">
+                    {% comment %}
+                    Отображение общих ошибок формы
+                    {% endcomment %}
+                    {% if form.non_field_errors %}
+                        <ul class="error-list">
+                            {% for error in form.non_field_errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    
+                    {% comment %}
+                    Отображение ошибок для конкретных полей
+                    {% endcomment %}
+                    {% for field in form %}
+                        {% if field.errors %}
+                            <ul class="error-list">
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% comment %}
+            Кнопка отправки формы
+            type="submit" - отправляет форму при нажатии
+            {% endcomment %}
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
+
