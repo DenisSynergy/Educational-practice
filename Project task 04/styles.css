@@ -1,0 +1,211 @@
+
+* {
+    /* Сброс настроек */
+    margin: 0;
+    padding: 0;
+    /* Меняем поведение блочной модели! */
+    box-sizing: border-box;
+    }
+/* Общие настройки оформления */
+body {
+    /* Шрифт для калькулятора */
+    font-family: 'Roboto', sans-serif;
+    /* Линейный градиент для фона страницы */
+    background: linear-gradient(140deg, #111335 0%, #1b1f56 100%);
+    /* Позиционирование */
+    min-height: 100vh;
+    /* Центрирование */
+    display: flex;
+    /* Выравнивание по горизонтали */
+    justify-content: center;
+    /* Выравнивание по вертикали */
+    align-items: center;
+    /* Отступы внутри */
+    padding: 20px;
+    }
+
+.calculatorContainer {
+    /* Фон основания */
+    background: linear-gradient(140deg, #2e3c41 0%, #1e282c 100%);
+    /* Скругление углов */
+    border-radius: 5px;
+    /* Отступы внутри */
+    padding: 40px;
+    /* Ширина */
+    max-width: 350px;
+    width: 100%;
+    }
+
+h1 {
+    /* Выравнивание текста по центру */
+    text-align: center;
+    /* Цвет текста */
+    color: #ffffff;
+    /* Отступ снизу */
+    margin-bottom: 30px;
+    /* Размер шрифта */
+    font-size: 28px;
+    }
+
+.inputGroup {
+    /* Отступ снизу */
+    margin-bottom: 20px;
+    }
+
+label {
+    /* Позиционирование названий окон ввода */
+    display: block;
+    /* Отступ снизу */
+    margin-bottom: 5px;
+    /* Цвет шрифта */
+    color: #ffffff;
+    /* Толщина шрифта */
+    font-weight: 500;
+    }
+
+input[type="number"] {
+    /* Позиционирование в родительском элементе */
+    width: 100%;
+    /* Отступы внутри */
+    padding: 12px;
+    /* Фон элемента */
+    background: #ffffff;
+    border: 0px solid #1a2225;
+    border: none;
+    /* Тень для глубины табло */
+    box-shadow:inset 3px 3px 5px rgba(0, 0, 0, 0.6);
+    /* Скругление углов */
+    border-radius: 5px;
+    /* Размер шрифта */
+    font-size: 14px;
+    }
+
+input[type="number"]:focus {
+    outline: none;
+    border: 0px;
+    }
+
+.btContainer {
+    /* grid позиционирование в ячейках */
+    display: grid; 
+    /* grid позиционирование в ячейках */
+    grid-template-columns: repeat(2, 1fr);
+    /* Расстояние между элементами */
+    gap: 15px;
+    /* Отступ снизу */
+    margin-bottom: 20px;
+    /* Переход для плавной анимации */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+button {
+    /* Отступ */
+    padding: 15px 5px;
+    /* Размер шрифта */
+    font-size: 12px;
+    /* Толщина шрифта */
+    font-weight: 600;
+    /* Рамка 0 */
+    border: 0px;
+    /* Скругление углов */
+    border-radius: 5px;
+    /* Цвет шрифта */
+    color: white;
+    /* Заглавные буквы */
+    text-transform: uppercase;
+    /* Переход для плавных анимаций */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* Тень для создания эффекта глубины */
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    }
+
+button:hover {
+    /* Курсор при наведении */
+    cursor: pointer;
+    /* Тень при наведении */
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.7);
+    }
+
+button:active {
+    /* Уменьшение при нажатии */
+    transform: scale(0.95);
+    }
+
+.btSum {
+    /* Градиент */
+    background: linear-gradient(180deg, #3b4b51 0%, #222c30 85%);
+    }
+
+.btSubtract {
+    /* Градиент */
+    background: linear-gradient(180deg, #3b4b51 0%, #222c30 85%);
+    }
+
+.btMultiply  {
+    /* Градиент */
+    background: linear-gradient(180deg, #3b4b51 0%, #222c30 85%);
+    }
+
+.btDivide {
+    /* Градиент */
+    background: linear-gradient(180deg, #3b4b51 0%, #222c30 85%);
+    }
+
+.resultContainer {
+    margin-top: 20px;
+    }
+
+.resultLabel {
+    /* Позиционирование названия окона результата */
+    display: block;
+    /* Отступ снизу */
+    margin-bottom: 5px;
+    /* Цвет шрифта */
+    color: #ffffff;
+    /* Толщина шрифта */
+    font-weight: 500;
+    }
+
+.resultWindow {
+    /* Ширина */
+    width: 100%;
+    /* Высота */
+    min-height: 80px;
+    /* Отступ */
+    padding: 15px;
+    /* Скругление углов */
+    border-radius: 5px;
+    /* Рамка 0 */
+    border: 0px;
+    /* Тень для создания эффекта глубины */
+    box-shadow:inset 2px 2px 4px rgba(0, 0, 0, 0.6);
+    /* Фон элемента - "по умолчанию") */
+    background: #ffffff;
+    /* Размер шрифта */
+    font-size: 16px;
+    /* Цвет шрифта */
+    color: #1a2718;
+    /* Выравнивание текста */
+    text-align: center;
+    /* Позиционирование */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Перенос слов */
+    overflow-wrap: break-word;
+    }
+
+    .resultWindow.success {
+    /* Фон элемента - "Ok") */
+    background: green;
+    /* Цвет шрифта */
+    color: #ffffff;
+    }
+
+    .resultWindow.error {
+    /* Фон элемента - "Error") */
+    background: #ff0000;
+    /* Цвет шрифта */
+    color: #ffffff;
+    }
+
